@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>DAL logo sketches</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            button{
+                background:transparent;
+                border:none;
+                cursor:pointer;
+            }
+            select, button{
+                font-size:1.5rem;
+            }
+            iframe{
+                position:fixed;
+                z-index:-1;
+                top:0px;
+                left:0px;
+                width:100vw;
+                height:100vh;
+                outline:none;
+                border:0px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <select name="sketches" id="sketches">
+            <option value="rotate">Rotate</option>
+            <option value="expandContract">Expand/Contract</option>
+            <option value="wind">Wind</option>
+            <option value="gradient">Gradient</option>
+        </select>
+
+        <button id="blackwhite" data-value="white">⚫/⚪</button>
+
+        <iframe src="rotate.html"></iframe>
+
+
+        <script>
+            let select = document.getElementById("sketches");
+            let loadSketch = document.getElementById("sketch");
+            let scriptElem;
+            let bwBtn = document.getElementById("blackwhite");
+
+            select.onchange=function(){
+                document.querySelector("iframe").src = `${select.value}.html`;
+            }
+
+            bwBtn.addEventListener("click", function(){
+                let val = this.getAttribute("data-value");
+                let newVal = (val == "black") ? "white" : "black"
+                this.setAttribute("data-value", newVal);
+                document.querySelector("iframe").src = `${select.value}.html`;
+                document.body.style.background = newVal;
+            })
+        </script>
+
+    </body>
+</html>
